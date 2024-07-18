@@ -20,19 +20,19 @@
 
 #ifndef LIBUSB_THREADS_WINDOWS_H
 #define LIBUSB_THREADS_WINDOWS_H
-
+#include <intrin.h>
 #define WINAPI_CHECK(expression)	ASSERT_NE(expression, 0)
 
 #define USBI_MUTEX_INITIALIZER	0L
 typedef LONG usbi_mutex_static_t;
 static inline void usbi_mutex_static_lock(usbi_mutex_static_t *mutex)
 {
-	while (InterlockedExchange(mutex, 1L) == 1L)
+	while (_InterlockedExchange(mutex, 1L) == 1L)
 		SleepEx(0, TRUE);
 }
 static inline void usbi_mutex_static_unlock(usbi_mutex_static_t *mutex)
 {
-	InterlockedExchange(mutex, 0L);
+	_InterlockedExchange(mutex, 0L);
 }
 
 typedef CRITICAL_SECTION usbi_mutex_t;

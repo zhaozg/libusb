@@ -100,8 +100,8 @@
 typedef volatile LONG usbi_atomic_t;
 #define usbi_atomic_load(a)	(*(a))
 #define usbi_atomic_store(a, v)	(*(a)) = (v)
-#define usbi_atomic_inc(a)	InterlockedIncrement((a))
-#define usbi_atomic_dec(a)	InterlockedDecrement((a))
+#define usbi_atomic_inc(a)	_InterlockedIncrement((a))
+#define usbi_atomic_dec(a)	_InterlockedDecrement((a))
 #else
 #if defined(__HAIKU__) && defined(__GNUC__) && !defined(__clang__)
 /* The Haiku port of libusb has some C++ files and GCC does not define

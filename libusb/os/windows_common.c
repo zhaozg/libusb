@@ -862,7 +862,7 @@ void usbi_get_monotonic_time(struct timespec *tp)
 	static uint64_t hires_frequency;
 	LARGE_INTEGER hires_counter;
 
-	if (InterlockedExchange(&hires_counter_init, 1L) == 0L) {
+	if (_InterlockedExchange(&hires_counter_init, 1L) == 0L) {
 		LARGE_INTEGER li_frequency;
 
 		// Microsoft says that the QueryPerformanceFrequency() and
